@@ -1,0 +1,36 @@
+{
+  "name": "browser-version-tool-html",
+  "version": "1.0.0",
+  "description": "Print tips on outdate browser. ",
+  "main": "dist/browser-version.cjs.js",
+  "module": "dist/browser-version.esm.js",
+  "browser": "dist/browser-version.umd.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "ts-node test/test.ts",
+    "pretest": "npm run build"
+  },
+  "author": "Yenkos",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@rollup/plugin-html": "^0.2.0",
+    "@types/ms": "^0.7.31",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-latest": "^6.24.1",
+    "rollup": "^2.35.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-clear": "^2.0.7",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-hash": "^1.3.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript": "^1.0.1",
+    "rollup-plugin-uglify": "^6.0.4",
+    "ts-node": "^9.1.1",
+    "tslib": "^2.0.3",
+    "typescript": "^4.1.3"
+  },
+  "types": "dist/index.d.ts"
+}
