@@ -6,18 +6,18 @@ import babel from 'rollup-plugin-babel';
 import typescript from 'rollup-plugin-typescript';
 
 export default {
-  input: 'src/index.ts', // 源文件入口
+  input: 'src/index.js', // 源文件入口
   output: [
     {
-      file: 'dist/browser-version-tool.esm.js', // package.json 中 "module"
+      file: 'dist/image-lazy-load.esm.js', // package.json 中 "module"
       format: 'esm', // es module 形式的包， 用来import 导入， 可以tree shaking
       sourcemap: false
     }, {
-      file: 'dist/browser-version-tool.cjs.js', // package.json 中 "main"
+      file: 'dist/image-lazy-load.cjs.js', // package.json 中 "main"
       format: 'cjs', // commonjs 形式的包， require 导入
       sourcemap: false
     }, {
-      file: 'dist/browser-version-tool.umd.js',
+      file: 'dist/image-lazy-load.umd.js',
       name: 'GLWidget',
       format: 'umd', // umd 兼容形式的包， 可以直接应用于网页 script
       sourcemap: false,
@@ -31,7 +31,7 @@ export default {
     babel({
       exclude: 'node_modules/**'
     }),
-    typescript(),
+    // typescript(),
     commonjs(),
     terser(),
   ]
