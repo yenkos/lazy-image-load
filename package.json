@@ -1,10 +1,10 @@
 {
   "name": "browser-version-tool-html",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Print tips on outdate browser. ",
-  "main": "dist/browser-version.cjs.js",
-  "module": "dist/browser-version.esm.js",
-  "browser": "dist/browser-version.umd.js",
+  "main": "dist/browser-version-tool.cjs.js",
+  "module": "dist/browser-version-tool.esm.js",
+  "browser": "dist/browser-version-tool.umd.js",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",

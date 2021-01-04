@@ -1,61 +1,81 @@
-### 包含功能
-- 获取浏览器类型以及版本号
-- 检测浏览器是否支持指定版本的浏览器
-- 输出提示
+### simple config preview
+![](https://raw.githubusercontent.com/yenkos/PicGo/main/img/%E6%88%AA%E5%B1%8F2021-01-04%20%E4%B8%8A%E5%8D%889.52.36.png)
 
-### API 浏览器检测
-示例：指定支持ESM的浏览器才能打开，否则输出提示
+### usage
+- get browser type and version
+- checkout browser support
+- show tips
+
+### API check support and show tips(ESM)
 ```Javascript
-new BrowserTips({
+import { BrowserVersionTool } from 'browser-version-tool-html';
+// full config
+new BrowserVersionTool({
+  showTips: true,
+  customTips: false,
   tips: {
     logo: 'https://img1.xxx.cn/assest/202007/SUPER5F0E785676F3B.png',
     url: 'https://www.xxxx.com/',
     copyright: '粤ICP备xxx',
-    name: 'xxx',
+    name: 'xxx公司/网站',
   },
   support: {
     'IE': 'none',
     'EDGE': '19',
     'Firefox': '67',
-    'Chrome': '63', // 安卓5以上
+    'Chrome': '63', // android 5 last
     'Opera': '50',
-    'Safari': '11', // IOS 11以上
+    'Safari': '11', // IOS 11 last
     'Unkonwn': 'none',
   },
-}).check();
+}).checkSupport();
+
+// simple config
+new BrowserVersionTool({
+  support: {
+    'IE': 'none',
+    'EDGE': '19',
+  },
+}).checkSupport();
 ```
 
-### API 获取浏览器版本号
-示例：指定支持ESM的浏览器才能打开，否则输出提示
+### API get version(ESM)
 ```Javascript
-new BrowserTips().getExplore();
-// 输出 { type: 'Chrome', version: '80', support: 'all' }
+import { BrowserVersionTool } from 'browser-version-tool-html';
+new BrowserVersionTool().getExplore(); // print { type: 'Chrome', version: '80', support: 'all' }
 ```
 
-### 完整config
+### API get version(UMD script)
+```html
+<script type="text/javascript" src="/js/browser-version-tool.umd.js"></script>
+<script>
+new window.GLWidget.BrowserVersionTool().getExplore(); // print { type: 'Chrome', version: '80', support: 'all' }
+</script>
+```
+### config
 ```Javascript
 interface Config {
-  showTips?: boolean; // 是否显示html提示
-  customTips?: string; // 自定义html提示
-  tips?: Tips;
-  support?: Support;
+  showTips?: boolean; // 是否显示html提示 is show html tips
+  customTips?: string; // 自定义html提示 custom tips
+  tips?: Tips; // 内置html提示的一些定制样式 default tips customization
+  support?: Support; // 定义浏览器最小支持的版本 support last version
 }
 
 interface Tips {
-  logo: string; // 默认提示的logo
-  url: string; // 默认提示的url
-  copyright: string; // 默认提示的底部copyright
-  name: string; // 默认提示的底部显示名字
+  logo: string; // 默认提示的logo logo
+  url: string; // 默认提示的url jump url
+  copyright: string; // 默认提示的底部 copyright
+  name: string; // 默认提示的底部显示名字 website name / company name
 }
 
 // 限定最低支持的版本
 interface Support {
-  IE?: string | number, // none | all | minSupportVersion
+  IE?: string | number, // none | all | number(最小支持的版本 last version)
   EDGE?: string | number,
   Firefox?: string | number,
-  Chrome?: string | number, // 安卓5以上
+  Chrome?: string | number,
   Opera?: string | number,
-  Safari?: string | number, // IOS 11以上
-  Unkonwn?: string | number, // 其他厂商浏览器，一般也是多核的，会被chrome捕获
+  Safari?: string | number,
+  Unkonwn?: string | number, // 其他厂商浏览器 other browser
 }
 ```

@@ -9,15 +9,15 @@ export default {
   input: 'src/index.ts', // 源文件入口
   output: [
     {
-      file: 'dist/browser-version.esm.js', // package.json 中 "module": "dist/browser-version.esm.js"
+      file: 'dist/browser-version-tool.esm.js', // package.json 中 "module"
       format: 'esm', // es module 形式的包， 用来import 导入， 可以tree shaking
       sourcemap: false
     }, {
-      file: 'dist/browser-version.cjs.js', // package.json 中 "main": "dist/browser-version.cjs.js",
+      file: 'dist/browser-version-tool.cjs.js', // package.json 中 "main"
       format: 'cjs', // commonjs 形式的包， require 导入
       sourcemap: false
     }, {
-      file: 'dist/browser-version.umd.js',
+      file: 'dist/browser-version-tool.umd.js',
       name: 'GLWidget',
       format: 'umd', // umd 兼容形式的包， 可以直接应用于网页 script
       sourcemap: false,

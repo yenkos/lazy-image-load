@@ -29,7 +29,7 @@ interface BrowerExplore {
   version?: string | number;
 }
 
-export class BrowserVersion {
+export class BrowserVersionTool {
   public config: Config;
   constructor(config: Config) {
     this.config = {
