@@ -12,8 +12,8 @@
 ### describe
 - Depend on IntersectionObserver API
 - Auto Fallback
-- Customer loading style
-- Customer loaded error style
+- Customize loading style
+- Customize loaded error style
 
 ### example
 ```Javascript
@@ -31,10 +31,21 @@ app.directive('lazy', lazy);
 <!-- support src or data-src -->
 <img v-lazy src="[https://](https://avatars0.githubusercontent.com/u/69024391?s=60&v=4)">
 <img v-lazy data-src="[https://](https://avatars0.githubusercontent.com/u/69024391?s=60&v=4)">
+
+<!-- Customize loading and error -->
+<span>
+  <img v-lazy data-src="[https://](https://avatars0.githubusercontent.com/u/69024391?s=60&v=4)">
+  <div class="loading-tips img-tips">
+    show loading...
+  </div>
+  <div class="error-tips img-tips">
+    show error
+  </div>
+</span>
 ```
 
 ```less
-.imgTips {
+.img-tips {
   position: absolute;
   top: 0;
   right: 0;
@@ -45,14 +56,18 @@ app.directive('lazy', lazy);
   justify-content: center;
   color: rgb(192, 196, 204);
   font-size: 12px;
-  background: rgb(245, 247, 250);
+  background: rgb(255, 255, 255);
+  opacity: 0;
+  transition: opacity 1s ease;
 }
-.img-loading::before {
-  content: '正在加载' !important;
-  .imgTips();
+.loading {
+  .loading-tips {
+    opacity: 1;
+  }
 }
-.img-error::before {
-  content: '加载失败';
-  .imgTips();
+.error {
+  .error-tips {
+    opacity: 1;
+  }
 }
 ```

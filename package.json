@@ -1,6 +1,6 @@
 {
   "name": "lazy-image-load",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "image lazy load support vue3. ",
   "main": "dist/image-lazy-load.cjs.js",
   "module": "dist/image-lazy-load.esm.js",
