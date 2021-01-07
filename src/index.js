@@ -12,7 +12,6 @@ const loadImage = (src) => {
     img.onload = () => {
       return resolve({
         src,
-        img,
       });
     };
     img.onerror = () => {
@@ -28,32 +27,29 @@ const lazyImageObserver = (() => {
   }
   return new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      const { target, intersectionRatio } = entry;
-      if (intersectionRatio > 0) {
+      const { target, isIntersecting } = entry;
+      if (isIntersecting) {
         loadImage(target.getAttribute('data-src'))
           .then(({ src }) => {
-            // requestAnimationFrame比IntersectionObserver支持更好，就不再检测了
+            target.src = src;
             window.requestAnimationFrame(() => {
-              target.src = src;
-              target.style.transition = 'all 1s ease';
               target.style.opacity = 1;
-              target.setAttribute('data-loaded', 'true');
             });
-            target.style.opacity = 0;
           })
           .catch(() => {
             target.src = '';
-            target.setAttribute('data-loaded', 'false');
-            target.classList.add('img-error');
+            target.parentNode.classList.add('error');
           })
           .finally(() => {
-            target.classList.remove('img-loading');
+            target.parentNode.classList.remove('loading');
+            target.parentNode.classList.add('loaded');
           });
         lazyImageObserver.unobserve(target);
       }
     })
   });
 })();
+
 
 export default {
   beforeMount(el) {
@@ -75,11 +71,15 @@ export default {
     if (!src && !dataSrc) {
       return;
     }
-    el.style.opacity = 1;
     el.setAttribute('data-src', src || dataSrc);
-    el.setAttribute('src', '');
-    el.classList.add('img-loading');
+    el.src = '';
+    el.style.opacity = 0;
+    el.style.transform = 'translate3d(0, 0, 0)';
+    el.style.transition = 'all 1s ease';
     lazyImageObserver.observe(el);
+  },
+  mounted(el) {
+    el.parentNode.classList.add('loading');
   },
   unmounted(el) {
     lazyImageObserver.unobserve(el);
