@@ -81,4 +81,7 @@ export default {
     el.classList.add('img-loading');
     lazyImageObserver.observe(el);
   },
+  unmounted(el) {
+    lazyImageObserver.unobserve(el);
+  },
 };
